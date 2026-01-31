@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-main: #050816;
+  --bg-card: #0f172a;
+  --accent-gold: #f5c451;
+  --accent-purple: #6366f1;
+  --accent-teal: #14b8a6;
+}
+
+body {
+  @apply bg-[#050816] text-slate-100;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Segoe UI", sans-serif;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 9999px;
+}
