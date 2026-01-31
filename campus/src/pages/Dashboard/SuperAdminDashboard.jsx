@@ -1,7 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import PageHeader from "../../components/PageHeader";
 import StatCard from "../../components/StatCard";
 import SectionCard from "../../components/SectionCard";
+import PrimaryButton from "../../components/PrimaryButton";
 
 const SuperAdminDashboard = () => {
   return (
@@ -38,7 +40,7 @@ const SuperAdminDashboard = () => {
         />
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-5">
+      <div className="grid lg:grid-cols-3 gap-5 mb-5">
         <SectionCard title="Module Status">
           <ul className="space-y-1.5">
             <li>Smart Attendance – Stable, 3 minor alerts.</li>
@@ -56,12 +58,13 @@ const SuperAdminDashboard = () => {
           </p>
         </SectionCard>
 
-        <SectionCard title="Master Controls">
+        <SectionCard title="Student Reports & Data">
           <ul className="space-y-1.5">
-            <li>Toggle portal sync for Library, Sports, Washrooms.</li>
-            <li>Role management and access policies.</li>
-            <li>Recent system logs and anomaly detection.</li>
-            <li>API performance and error monitoring.</li>
+            <li>342 students marked attendance today.</li>
+            <li>67 sports equipment bookings active.</li>
+            <li>42 library seats currently booked.</li>
+            <li>8 washroom issues reported this week.</li>
+            <li>156 navigation searches performed.</li>
           </ul>
         </SectionCard>
       </div>

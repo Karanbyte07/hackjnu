@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
@@ -26,21 +27,21 @@ const AppRoutes = () => {
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
 
-        {/* Dashboards by role */}
-        <Route path="/dashboard/super-admin" element={<SuperAdminDashboard />} />
-        <Route path="/dashboard/sports" element={<SportsDashboard />} />
-        <Route path="/dashboard/library" element={<LibraryDashboard />} />
-        <Route path="/dashboard/faculty-lead" element={<FacultyLeadDashboard />} />
-        <Route path="/dashboard/faculty" element={<FacultyPortal />} />
-        <Route path="/dashboard/student" element={<StudentPortal />} />
+        {/* Dashboards by role - Protected */}
+        <Route path="/dashboard/super-admin" element={<ProtectedRoute><SuperAdminDashboard /></ProtectedRoute>} />
+        <Route path="/dashboard/sports" element={<ProtectedRoute><SportsDashboard /></ProtectedRoute>} />
+        <Route path="/dashboard/library" element={<ProtectedRoute><LibraryDashboard /></ProtectedRoute>} />
+        <Route path="/dashboard/faculty-lead" element={<ProtectedRoute><FacultyLeadDashboard /></ProtectedRoute>} />
+        <Route path="/dashboard/faculty" element={<ProtectedRoute><FacultyPortal /></ProtectedRoute>} />
+        <Route path="/dashboard/student" element={<ProtectedRoute><StudentPortal /></ProtectedRoute>} />
 
-        {/* Feature pages */}
-        <Route path="/attendance" element={<SmartAttendance />} />
-        <Route path="/washrooms" element={<WashroomManagement />} />
-        <Route path="/sports-booking" element={<SportsBooking />} />
-        <Route path="/library-booking" element={<LibraryBooking />} />
-        <Route path="/navigation" element={<CampusNavigation />} />
-        <Route path="/admin" element={<AdminDashboard />} />
+        {/* Feature pages - Protected */}
+        <Route path="/attendance" element={<ProtectedRoute><SmartAttendance /></ProtectedRoute>} />
+        <Route path="/washrooms" element={<ProtectedRoute><WashroomManagement /></ProtectedRoute>} />
+        <Route path="/sports-booking" element={<ProtectedRoute><SportsBooking /></ProtectedRoute>} />
+        <Route path="/library-booking" element={<ProtectedRoute><LibraryBooking /></ProtectedRoute>} />
+        <Route path="/navigation" element={<ProtectedRoute><CampusNavigation /></ProtectedRoute>} />
+        <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
       </Route>
     </Routes>
   );

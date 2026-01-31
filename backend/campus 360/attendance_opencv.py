@@ -36,6 +36,11 @@ def get_attendance_status(user_id: int):
 
 @router.get("/live")
 def live_attendance():
+    global students, marked_time
+    # Reset attendance for new session
+    students = {name: False for name in label_names}
+    marked_time = {}
+    
     cap = cv2.VideoCapture(0)
 
     while True:
@@ -81,3 +86,32 @@ def live_attendance():
     cap.release()
     cv2.destroyAllWindows()
     return {"status": "Camera closed"}
+
+
+@router.get("/marked")
+def get_marked_attendance():
+    """Get real-time marked attendance"""
+    marked_students = []
+    for name in label_names:
+        if students.get(name, False):
+            marked_students.append({
+                "name": name,
+                "time": marked_time.get(name, "N/A"),
+                "status": "Present"
+            })
+    
+    return {
+        "total_students": len(label_names),
+        "marked_count": len(marked_students),
+        "marked_students": marked_students,
+        "unmarked_count": len(label_names) - len(marked_students)
+    }
+
+
+@router.get("/reset")
+def reset_attendance():
+    """Reset attendance for new session"""
+    global students, marked_time
+    students = {name: False for name in label_names}
+    marked_time = {}
+    return {"status": "Attendance reset successfully"}

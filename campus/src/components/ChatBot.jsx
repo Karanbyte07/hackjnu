@@ -67,6 +67,10 @@ const ChatBot = ({ onActionComplete = null }) => {
           onActionComplete("sports_booking");
         }
       }
+
+      if (data.reply.includes("✅") && userMessage.toLowerCase().includes("sports")) {
+        window.dispatchEvent(new CustomEvent("campus360:sports-booking"));
+      }
     } catch (error) {
       console.error("Chatbot error:", error);
       setMessages((prev) => [...prev, {

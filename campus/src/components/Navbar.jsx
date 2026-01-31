@@ -1,8 +1,23 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem("campus360_user") || "{}");
+    if (userData.loggedIn) {
+      setUser(userData);
+    }
+  }, [location]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("campus360_user");
+    setUser(null);
+    navigate("/");
+  };
 
   return (
     <header className="h-16 flex items-center justify-between px-4 sm:px-8 border-b border-slate-800 bg-[#050816]/60 backdrop-blur">
@@ -19,15 +34,31 @@ const Navbar = () => {
       </Link>
 
       <div className="flex items-center gap-4">
-        <span className="hidden sm:inline text-xs text-slate-400">
-          {location.pathname === "/" ? "Demo / Working Model" : location.pathname}
-        </span>
-        <Link
-          to="/login"
-          className="px-3 py-1.5 rounded-full text-xs font-medium bg-yellow-400 text-slate-900 hover:bg-yellow-300 transition"
-        >
-          Login
-        </Link>
+        {user ? (
+          <>
+            <span className="hidden sm:inline text-xs text-slate-300">
+              {user.name} • {user.role}
+            </span>
+            <button
+              onClick={handleLogout}
+              className="px-3 py-1.5 rounded-full text-xs font-medium bg-slate-700 text-slate-100 hover:bg-slate-600 transition"
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <span className="hidden sm:inline text-xs text-slate-400">
+              {location.pathname === "/" ? "" : location.pathname}
+            </span>
+            <Link
+              to="/login"
+              className="px-3 py-1.5 rounded-full text-xs font-medium bg-yellow-400 text-slate-900 hover:bg-yellow-300 transition"
+            >
+              Login
+            </Link>
+          </>
+        )}
       </div>
     </header>
   );

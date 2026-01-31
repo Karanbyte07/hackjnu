@@ -3,14 +3,89 @@ import PageHeader from "../../components/PageHeader";
 import SectionCard from "../../components/SectionCard";
 
 const CampusNavigation = () => {
+  // Check if user is Super Admin
+  const user = JSON.parse(localStorage.getItem("campus360_user") || "{}");
+  const isSuperAdmin = user.role === "Super Admin";
+
   return (
     <div className="max-w-5xl mx-auto">
       <PageHeader
         badge="Navigation"
         title="Smart Campus Navigation & Classroom Finder"
-        subtitle="Interactive campus map and real‑time classroom availability for students and faculty."
+        subtitle={isSuperAdmin 
+          ? "View navigation usage statistics and popular routes" 
+          : "Interactive campus map and real‑time classroom availability for students and faculty."}
       />
 
+      {isSuperAdmin && (
+        <div className="mb-5">
+          <SectionCard title="Super Admin - Navigation Overview">
+            <div className="grid md:grid-cols-4 gap-4 mb-4">
+              <div className="bg-slate-900 rounded-xl p-4">
+                <p className="text-xs text-slate-400 mb-1">Total Searches</p>
+                <p className="text-2xl font-bold text-emerald-400">312</p>
+              </div>
+              <div className="bg-slate-900 rounded-xl p-4">
+                <p className="text-xs text-slate-400 mb-1">Today</p>
+                <p className="text-2xl font-bold text-blue-400">156</p>
+              </div>
+              <div className="bg-slate-900 rounded-xl p-4">
+                <p className="text-xs text-slate-400 mb-1">Active Users</p>
+                <p className="text-2xl font-bold text-purple-400">89</p>
+              </div>
+              <div className="bg-slate-900 rounded-xl p-4">
+                <p className="text-xs text-slate-400 mb-1">Popular Routes</p>
+                <p className="text-2xl font-bold text-yellow-400">24</p>
+              </div>
+            </div>
+            
+            <div className="mb-3">
+              <p className="text-xs text-slate-400 mb-2">Most Searched Locations:</p>
+              <div className="space-y-2">
+                <div className="bg-slate-900 rounded-lg p-3">
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <p className="text-sm font-medium text-slate-200">CS-201 (Computer Lab)</p>
+                      <p className="text-xs text-slate-400">Block C, 2nd Floor</p>
+                    </div>
+                    <span className="px-2 py-1 rounded-full text-xs bg-emerald-500/20 text-emerald-400">
+                      87 searches
+                    </span>
+                  </div>
+                </div>
+                <div className="bg-slate-900 rounded-lg p-3">
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <p className="text-sm font-medium text-slate-200">Library Main Hall</p>
+                      <p className="text-xs text-slate-400">Block A, 1st Floor</p>
+                    </div>
+                    <span className="px-2 py-1 rounded-full text-xs bg-blue-500/20 text-blue-400">
+                      64 searches
+                    </span>
+                  </div>
+                </div>
+                <div className="bg-slate-900 rounded-lg p-3">
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <p className="text-sm font-medium text-slate-200">Sports Complex</p>
+                      <p className="text-xs text-slate-400">Block D, Ground Floor</p>
+                    </div>
+                    <span className="px-2 py-1 rounded-full text-xs bg-purple-500/20 text-purple-400">
+                      42 searches
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <p className="text-xs text-slate-500 mt-3">
+              ℹ️ Super Admin has view-only access. Cannot perform navigation searches.
+            </p>
+          </SectionCard>
+        </div>
+      )}
+
+      {!isSuperAdmin && (
       <div className="grid lg:grid-cols-3 gap-5">
         <SectionCard title="Search Classroom">
           <input
@@ -42,6 +117,7 @@ const CampusNavigation = () => {
           </ul>
         </SectionCard>
       </div>
+      )}
     </div>
   );
 };

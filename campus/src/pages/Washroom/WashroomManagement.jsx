@@ -83,14 +83,76 @@ const WashroomManagement = () => {
   React.useEffect(() => {
     fetchAllIssues();
   }, [fetchAllIssues]);
+
+  // Check if user is Super Admin
+  const user = JSON.parse(localStorage.getItem("campus360_user") || "{}");
+  const isSuperAdmin = user.role === "Super Admin";
+
   return (
     <div className="max-w-5xl mx-auto">
       <PageHeader
         badge="Smart Washroom"
         title="Smart Washroom Management"
-        subtitle="Real‑time hygiene reports, gender‑based access, and priority alerts for girls’ washrooms."
+        subtitle={isSuperAdmin 
+          ? "View reported washroom issues and facility status" 
+          : "Real‑time hygiene reports, gender‑based access, and priority alerts for girls' washrooms."}
       />
 
+      {isSuperAdmin && (
+        <div className="mb-5">
+          <SectionCard title="Super Admin - Washroom Issues Overview">
+            <div className="grid md:grid-cols-3 gap-4 mb-4">
+              <div className="bg-slate-900 rounded-xl p-4">
+                <p className="text-xs text-slate-400 mb-1">Total Issues</p>
+                <p className="text-2xl font-bold text-emerald-400">{allIssues.length || 0}</p>
+              </div>
+              <div className="bg-slate-900 rounded-xl p-4">
+                <p className="text-xs text-slate-400 mb-1">High Priority</p>
+                <p className="text-2xl font-bold text-rose-400">
+                  {allIssues.filter(i => i.issue?.includes('No water') || i.issue?.includes('Broken')).length || 0}
+                </p>
+              </div>
+              <div className="bg-slate-900 rounded-xl p-4">
+                <p className="text-xs text-slate-400 mb-1">This Week</p>
+                <p className="text-2xl font-bold text-blue-400">8</p>
+              </div>
+            </div>
+            
+            <div className="mb-3">
+              <p className="text-xs text-slate-400 mb-2">Reported Issues:</p>
+              <div className="space-y-2 max-h-64 overflow-y-auto">
+                {allIssues.length > 0 ? (
+                  allIssues.map((issue, idx) => (
+                    <div key={idx} className="bg-slate-900 rounded-lg p-3">
+                      <div className="flex justify-between items-start mb-1">
+                        <p className="text-sm font-medium text-slate-200">{issue.issue}</p>
+                        <span className={`px-2 py-1 rounded-full text-xs ${
+                          issue.issue?.includes('No water') || issue.issue?.includes('Broken')
+                            ? 'bg-rose-500/20 text-rose-400'
+                            : 'bg-yellow-500/20 text-yellow-400'
+                        }`}>
+                          {issue.issue?.includes('No water') || issue.issue?.includes('Broken') ? 'High' : 'Medium'}
+                        </span>
+                      </div>
+                      <p className="text-xs text-slate-400">Gender: {issue.gender} • {issue.date || 'Recently reported'}</p>
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-xs text-slate-400 text-center py-3">
+                    No issues reported
+                  </div>
+                )}
+              </div>
+            </div>
+            
+            <p className="text-xs text-slate-500 mt-3">
+              ℹ️ Super Admin has view-only access. Cannot report new issues.
+            </p>
+          </SectionCard>
+        </div>
+      )}
+
+      {!isSuperAdmin && (
       <div className="grid lg:grid-cols-3 gap-5 mb-6">
         <SectionCard title="Report an Issue">
           <p className="text-xs text-slate-300 mb-2">
@@ -169,6 +231,7 @@ const WashroomManagement = () => {
           </ul>
         </SectionCard>
       </div>
+      )}
     </div>
   );
 };

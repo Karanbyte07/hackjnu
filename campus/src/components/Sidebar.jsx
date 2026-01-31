@@ -23,10 +23,6 @@ const navSection = [
       { label: "Campus Navigation", to: "/navigation" },
     ],
   },
-  {
-    title: "Admin",
-    items: [{ label: "System Workflow", to: "/admin" }],
-  },
 ];
 
 const Sidebar = () => {

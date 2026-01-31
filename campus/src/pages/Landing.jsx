@@ -52,23 +52,23 @@ const Landing = () => {
           </p>
           
           <div className="flex flex-wrap gap-4">
-            <PrimaryButton>
-              <Link to="/dashboard/student" className="flex items-center gap-2">
-                📱 Student Portal
-              </Link>
-            </PrimaryButton>
-            <Link
-              to="/dashboard/super-admin"
-              className="px-6 py-3 rounded-full text-sm font-semibold border border-slate-600 text-slate-100 hover:bg-slate-800 transition"
-            >
-              👤 Admin Dashboard
+            <Link to="/login">
+              <PrimaryButton className="flex items-center gap-2 px-6 py-3">
+                🔐 Login / Sign Up
+              </PrimaryButton>
             </Link>
+            <a
+              href="#features"
+              className="px-6 py-3 rounded-full text-sm font-semibold border border-slate-600 text-slate-100 hover:bg-slate-800 transition flex items-center gap-2"
+            >
+              📋 Explore Features
+            </a>
           </div>
         </div>
       </section>
 
       {/* Features Grid */}
-      <section className="mb-12">
+      <section id="features" className="mb-12">
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-slate-50 mb-2">Core Features</h2>
           <p className="text-slate-400">Comprehensive modules for modern campus management</p>
@@ -97,50 +97,69 @@ const Landing = () => {
             <p className="text-xs text-slate-400">Active Students</p>
           </div>
           <div className="rounded-2xl bg-slate-800/40 border border-slate-700 p-6 text-center">
-            <p className="text-3xl font-bold text-blue-400 mb-1">92%</p>
-            <p className="text-xs text-slate-400">Avg Attendance</p>
+            <p className="text-3xl font-bold text-blue-400 mb-1">50+</p>
+            <p className="text-xs text-slate-400">Faculty Members</p>
           </div>
           <div className="rounded-2xl bg-slate-800/40 border border-slate-700 p-6 text-center">
-            <p className="text-3xl font-bold text-purple-400 mb-1">45</p>
-            <p className="text-xs text-slate-400">Study Seats Available</p>
+            <p className="text-3xl font-bold text-purple-400 mb-1">6</p>
+            <p className="text-xs text-slate-400">Core Features</p>
           </div>
           <div className="rounded-2xl bg-slate-800/40 border border-slate-700 p-6 text-center">
-            <p className="text-3xl font-bold text-yellow-400 mb-1">18</p>
-            <p className="text-xs text-slate-400">Sports Bookings Today</p>
+            <p className="text-3xl font-bold text-yellow-400 mb-1">24/7</p>
+            <p className="text-xs text-slate-400">System Availability</p>
           </div>
         </div>
       </section>
 
-      {/* Technology Stack */}
-      <section className="rounded-2xl bg-slate-800/30 border border-slate-700 p-8">
-        <h2 className="text-xl font-bold text-slate-50 mb-4">Technology Stack</h2>
-        <div className="grid md:grid-cols-2 gap-8">
-          <div>
-            <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">
-              Frontend
+      {/* How It Works */}
+      <section className="mb-12">
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold text-slate-50 mb-2">How It Works</h2>
+          <p className="text-slate-400">Simple steps to get started with Campus360</p>
+        </div>
+        
+        <div className="grid md:grid-cols-3 gap-6">
+          <div className="rounded-2xl bg-slate-800/40 border border-slate-700 p-6">
+            <div className="w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-500/50 flex items-center justify-center mb-4">
+              <span className="text-xl font-bold text-emerald-400">1</span>
+            </div>
+            <h3 className="text-sm font-semibold text-slate-100 mb-2">Login with Your Credentials</h3>
+            <p className="text-xs text-slate-400">
+              Access your personalized dashboard based on your role - Student, Faculty, Sports Lead, Library Admin, or Super Admin.
             </p>
-            <p className="text-sm text-slate-300">React, Vite, Tailwind CSS</p>
           </div>
-          <div>
-            <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">
-              Backend
+          
+          <div className="rounded-2xl bg-slate-800/40 border border-slate-700 p-6">
+            <div className="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-500/50 flex items-center justify-center mb-4">
+              <span className="text-xl font-bold text-blue-400">2</span>
+            </div>
+            <h3 className="text-sm font-semibold text-slate-100 mb-2">Access Campus Services</h3>
+            <p className="text-xs text-slate-400">
+              Use AI-powered attendance, book library seats, reserve sports equipment, navigate campus, and manage facilities.
             </p>
-            <p className="text-sm text-slate-300">FastAPI, OpenCV, Python</p>
           </div>
-          <div>
-            <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">
-              AI/ML
+          
+          <div className="rounded-2xl bg-slate-800/40 border border-slate-700 p-6">
+            <div className="w-12 h-12 rounded-full bg-purple-500/20 border border-purple-500/50 flex items-center justify-center mb-4">
+              <span className="text-xl font-bold text-purple-400">3</span>
+            </div>
+            <h3 className="text-sm font-semibold text-slate-100 mb-2">Real-time Updates & Alerts</h3>
+            <p className="text-xs text-slate-400">
+              Get instant notifications about bookings, attendance, facility issues, and campus events through our integrated system.
             </p>
-            <p className="text-sm text-slate-300">LBPH Face Recognition, Haar Cascade</p>
-          </div>
-          <div>
-            <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">
-              Features
-            </p>
-            <p className="text-sm text-slate-300">Real-time Processing, Priority Alerts</p>
           </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="mt-12 py-8 border-t border-slate-800 text-center">
+        <p className="text-sm text-slate-400">
+          © 2025 Campus360. All rights reserved.
+        </p>
+        <p className="text-xs text-slate-500 mt-2">
+          Intelligent Campus Management Platform
+        </p>
+      </footer>
     </div>
   );
 };
