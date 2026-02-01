@@ -1,14 +1,16 @@
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from chatbot import chatbot_response
 
+
 app = FastAPI()
 
-# ✅ Enable CORS for frontend
+# Allow CORS for frontend (adjust origins as needed)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["http://localhost:5173"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
