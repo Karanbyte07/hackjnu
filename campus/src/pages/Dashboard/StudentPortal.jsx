@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 const StudentPortal = () => {
-  return (
-    <div className="text-center py-12">
-      <p className="text-slate-400">Student Dashboard Content</p>
-    </div>
-  );
+  const navigate = useNavigate();
+  useEffect(() => {
+    navigate("/attendance", { replace: true });
+  }, [navigate]);
+  return null;
 };
 
 export default StudentPortal;
